@@ -154,7 +154,6 @@ public class SettingsParser {
 					
 					start = asString.indexOf(" - ") + " - ".length();
 					end = asString.indexOf("<", start);
-					System.out.println(start + " " + end);
 					
 					summary = asString.substring(start, end);
 					
