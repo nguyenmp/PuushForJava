@@ -342,19 +342,24 @@ public class PuushClient {
 	}
 	
 	public static String upload(File file, CookieStore cookies) throws SAXNotSupportedException, IOException, SAXNotRecognizedException, URISyntaxException, TransformerException {
+		SettingsPayload settings = PuushClient.getSettings(cookies);
+		String apiKey = settings.getAPIKey();
+		return PuushClient.upload(file, apiKey);
+	}
+
+	public static String upload(File file, String apiKey) throws SAXNotSupportedException, IOException, SAXNotRecognizedException, URISyntaxException, TransformerException {
 		HttpClient client = new DefaultHttpClient();
-		String apiKey = PuushClient.getSettings(cookies).getAPIKey();
-		
+
 		HttpPost post = new HttpPost("https://puush.me/api/up");
-		
+
 		MultipartEntity entity = new MultipartEntity();
 		entity.addPart("k", new StringBody(apiKey));
 		entity.addPart("z", new StringBody("poop"));
 		entity.addPart("f", new FileBody(file));
-		
+
 		post.setEntity(entity);
 		HttpResponse response = client.execute(post);
-		
+
 		String contentString = readEntity(response.getEntity());
 		return contentString;
 	}
