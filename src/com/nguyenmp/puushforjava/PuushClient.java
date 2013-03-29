@@ -46,6 +46,10 @@ import com.nguyenmp.puushforjava.things.Pool;
 @SuppressWarnings("deprecation")
 public class PuushClient {
 	
+	private PuushClient() {
+		super();
+	}
+	
 	/**
 	 * Tries to log into puush.me using the given credentials.
 	 * @param email the email of the user
