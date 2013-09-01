@@ -1,0 +1,50 @@
+<?xml version="1.0" ?>
+
+<project name="Puush_for_Java" default="test" basedir=".">
+  <property name="root.project.name" value="puush_for_java" />
+  <property name="test.class" value="" />
+  <path id="project.class.path">
+    <pathelement location="build" />
+    <pathelement location="libs/commons-codec-1.6.jar"/>
+    <pathelement location="libs/commons-logging-1.1.1.jar"/>
+    <pathelement location="libs/httpclient-4.2.1.jar"/>
+    <pathelement location="libs/httpclient-cache-4.2.1.jar"/>
+    <pathelement location="libs/httpcore-4.2.1.jar"/>
+    <pathelement location="libs/httpmime-4.2.1.jar"/>
+    <pathelement location="libs/tagsoup-1.2.1.jar"/>
+  </path>
+  
+  <property name="jar.module" value="${root.project.name}.jar" />
+  
+  <target name="compile">
+    <mkdir dir="build" />
+    <javac srcdir="src" destdir="build" debug="on" optimize="on" includeantruntime="false" >
+      <classpath refid="project.class.path" />
+      <compilerarg value="-Xlint" />
+      <src path="src" />
+    </javac>
+  </target>
+  
+  <target name="makejar" depends="compile" >
+    <mkdir dir="dist" />
+    <jar jarfile="dist/${jar.module}" >
+      <fileset dir="build" >
+        <include name="**/*.class" />
+        <exclude name="test/*.class" />
+      </fileset>
+    </jar>
+    <jar jarfile="dist/test.jar" >
+      <fileset dir="build" >
+        <include name="test/*.class" />
+      </fileset>
+    </jar>
+    
+    <delete dir="build" />
+  </target>
+  
+  <target name="clean" >
+    <delete dir="build" />
+    <delete dir="dist" />
+  </target>
+
+</project>
