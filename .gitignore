@@ -1,20 +1,23 @@
-#java specific
+# Compiled Java #
 *.class
+bin/
+out/
+
 
 # Package Files #
 *.war
 *.ear
+*.jar
 
-bin/
-out/
+# Except Library Package Files #
+!lib/*.jar
 
-#netbeans ignore personal stuff 
-nbproject/private/
+# Ignore Project Files #
 .idea/
-.idea/*
 *.iml
+.settings/
 
-## generic files to ignore
+# generic files to ignore
 *~
 *.lock
 *.DS_Store
